@@ -1,0 +1,2 @@
+ID 1 Stars 3 Status SERVED Capacity 50 Cost 500
+ID 2 Stars 5 Status FREE Capacity 50 Cost 200

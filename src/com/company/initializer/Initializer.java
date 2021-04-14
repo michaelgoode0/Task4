@@ -22,13 +22,13 @@ public class Initializer {
         administrator.addRoom(room2);
         administrator.addClient(client1,room1);
         administrator.changeCost("1",500);
-        administrator.showRooms();
         administrator.getListOfClients();
         administrator.getNumberOfClients();
         administrator.getNumberOfFreeRooms();
         administrator.addService(service);
         administrator.addServiceToClient(client1,service);
         administrator.showServices();
+        administrator.exportData();
 
     }
 

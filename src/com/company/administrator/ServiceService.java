@@ -1,18 +1,18 @@
 package com.company.administrator;
 
 import com.company.entities.Client;
+import com.company.entities.Hotel;
 import com.company.entities.Service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ServiceService {
-    private ArrayList<Service> services=Service.getServices();
+public class ServiceService { ;
     private  Map<Client,Service> listOfServices = new HashMap<>();
 
     public void addService(Service service){
-        services.add(service);
+        Hotel.getHotel().getServices().add(service);
     }
 
     public void addServiceToClient(Client client, Service service){

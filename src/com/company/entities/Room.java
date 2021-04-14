@@ -51,7 +51,7 @@ public class Room {
         return stars;
     }
 
-    public void getRooms(Hotel hotel){
-
+    public String toString(){
+        return "ID "+this.id + " Stars " + this.stars + " Status "+ this.status + " Capacity " + this.capacity + " Cost " + this.cost;
     }
 }

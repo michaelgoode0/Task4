@@ -1,22 +1,34 @@
 package com.company.administrator;
 
+import com.company.dao.ClientDao;
+import com.company.dao.IClientDao;
+import com.company.dao.RoomDao;
+import com.company.dao.ServiceDao;
 import com.company.entities.Client;
+import com.company.entities.Hotel;
 import com.company.entities.Room;
 import com.company.entities.Service;
 
 public class Administrator {
-    private ServiceClient serviceClient=new ServiceClient();
-    private ServiceRoom serviceRoom = new ServiceRoom();
-    private ServiceService serviceService=new ServiceService();
+
+    private final ServiceClient serviceClient=new ServiceClient();
+    private final ServiceRoom serviceRoom = new ServiceRoom();
+    private final ServiceService serviceService=new ServiceService();
+    private final ClientDao clientDao= new ClientDao();
+    private final RoomDao roomDao= new RoomDao();
+    private final ServiceDao serviceDao = new ServiceDao();
+
+    public void exportData(){
+        clientDao.saveClient(Hotel.getHotel().getClients());
+        roomDao.saveRooms(Hotel.getHotel().getRooms());
+        serviceDao.saveServices(Hotel.getHotel().getServices());
+    }
 
      public void addRoom(Room room){
          serviceRoom.addRoom(room);
      }
      public void addClient(Client client, Room room){
          serviceClient.addClient(client,room);
-     }
-     public void showRooms(){
-         serviceRoom.showRooms();
      }
      public void changeCost(String id,int cost){
          serviceRoom.changeCost(id,cost);
@@ -42,5 +54,6 @@ public class Administrator {
      public void addServiceToClient(Client client,Service service){
          serviceService.addServiceToClient(client,service);
      }
+
 
 }

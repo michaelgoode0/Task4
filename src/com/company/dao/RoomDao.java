@@ -1,14 +1,22 @@
 package com.company.dao;
 
-import com.company.entities.Hotel;
+import com.company.entities.Client;
 import com.company.entities.Room;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
-public interface RoomDao {
-    void saveRoom(Room room);
+public class RoomDao implements IRoomDao {
+    private String path ="C:/Users/burts/OneDrive/Документы/GitHub/Task4/src/com/company/keeper/RoomData.txt";
 
-    void updateRoom(Room room);
-
-    ArrayList <Room> getRooms(Hotel hotel);
+    public void saveRooms(ArrayList<Room> rooms) {
+        try (FileWriter out = new FileWriter(path)) {
+            for (var item: rooms) {
+                out.write(item.toString() + "\n");
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }

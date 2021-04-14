@@ -1,9 +1,11 @@
 package com.company.entities;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
 public class Client {
+
     private String name;
     private Calendar dateOut;
 
@@ -20,5 +22,7 @@ public class Client {
         return dateOut;
     }
 
-
+    public String toString(){
+        return this.name +"  |"+this.dateOut.getTime();
+    }
 }
