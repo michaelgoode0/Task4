@@ -2,34 +2,33 @@ package com.company.entities;
 
 import com.company.enums.Status;
 
+import java.util.ArrayList;
+
 public class Room {
     private int cost;
-    private String number;
+    private String id;
     private Status status;
     private int capacity;
     private int stars;
 
-    public Room(String number,int cost,int capacity, int stars){
-        this.number=number;
+    public Room(String id, int cost, int capacity, int stars){
+        this.id = id;
         this.cost=cost;
         this.status=Status.FREE;
         this.capacity=capacity;
         this.stars=stars;
     }
-    public Room(){
 
-    }
-
-    public String getNumber() {
-        return number;
+    public String getId() {
+        return id;
     }
 
     public Status getStatus() {
         return status;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public void setStatus(Status status) {
@@ -50,5 +49,9 @@ public class Room {
 
     public int getStars() {
         return stars;
+    }
+
+    public void getRooms(Hotel hotel){
+
     }
 }

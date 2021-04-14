@@ -1,18 +1,35 @@
 package com.company.initializer;
 
-import com.company.manager.Worker;
+import com.company.administrator.Administrator;
+import com.company.entities.Client;
+import com.company.entities.Room;
+import com.company.entities.Service;
+
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 
 public class Initializer {
-    Worker worker=new Worker();
+    Administrator administrator=new Administrator();
     public Initializer(){
-        worker.add("Z1",1000,40,3);
-        worker.add("A2",14320,34,3);
-        worker.add("43",143220,100,5);
-        worker.add("b2",120,10,1);
-        worker.add("ok",1320,42,4);
+        Calendar calendar=new GregorianCalendar();
+        calendar.set(2020,6,25);
+        Client client1=new Client("Kirill",calendar);
+        Room room1=new Room("1",100,50,3);
+        Room room2=new Room("2",200,50,5);
+        Service service= new Service("Завтрак", 100);
+        administrator.addRoom(room1);
+        administrator.addRoom(room2);
+        administrator.addClient(client1,room1);
+        administrator.changeCost("1",500);
+        administrator.showRooms();
+        administrator.getListOfClients();
+        administrator.getNumberOfClients();
+        administrator.getNumberOfFreeRooms();
+        administrator.addService(service);
+        administrator.addServiceToClient(client1,service);
+        administrator.showServices();
 
-        worker.showRooms();
-        worker.sortByCost();
     }
 
 }
