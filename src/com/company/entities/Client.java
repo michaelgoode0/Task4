@@ -1,15 +1,14 @@
 package com.company.entities;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-
 public class Client {
 
     private String name;
-    private Calendar dateOut;
+    private String dateOut;
 
-    public Client(String name,Calendar dateOut){
+    public Client(){
+
+    }
+    public Client(String name,String dateOut){
         this.name=name;
         this.dateOut=dateOut;
     }
@@ -18,11 +17,19 @@ public class Client {
         return name;
     }
 
-    public Calendar getDateOut() {
+    public String getDateOut() {
         return dateOut;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDateOut(String dateOut) {
+        this.dateOut = dateOut;
+    }
+
     public String toString(){
-        return this.name +"  |"+this.dateOut.getTime();
+        return this.name +","+this.dateOut;
     }
 }

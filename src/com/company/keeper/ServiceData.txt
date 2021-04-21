@@ -1,1 +1,2 @@
-Name Завтрак | Cost 100
+Ice cream,2
+Mini-bar,5

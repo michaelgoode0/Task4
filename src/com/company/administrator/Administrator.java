@@ -5,55 +5,38 @@ import com.company.dao.IClientDao;
 import com.company.dao.RoomDao;
 import com.company.dao.ServiceDao;
 import com.company.entities.Client;
-import com.company.entities.Hotel;
 import com.company.entities.Room;
 import com.company.entities.Service;
 
+import java.io.IOException;
+
 public class Administrator {
 
-    private final ServiceClient serviceClient=new ServiceClient();
-    private final ServiceRoom serviceRoom = new ServiceRoom();
-    private final ServiceService serviceService=new ServiceService();
-    private final ClientDao clientDao= new ClientDao();
-    private final RoomDao roomDao= new RoomDao();
-    private final ServiceDao serviceDao = new ServiceDao();
+    private final ServiceClient serviceClient;
+    private final ServiceRoom serviceRoom;
+    private final ServiceService serviceService;
 
-    public void exportData(){
-        clientDao.saveClient(Hotel.getHotel().getClients());
-        roomDao.saveRooms(Hotel.getHotel().getRooms());
-        serviceDao.saveServices(Hotel.getHotel().getServices());
+    public Administrator(ServiceClient serviceClient, ServiceRoom serviceRoom, ServiceService service){
+        this.serviceService=service;
+        this.serviceClient=serviceClient;
+        this.serviceRoom=serviceRoom;
     }
+
 
      public void addRoom(Room room){
          serviceRoom.addRoom(room);
      }
-     public void addClient(Client client, Room room){
-         serviceClient.addClient(client,room);
+     public void addClient(Client client){
+         serviceClient.addClient(client);
      }
-     public void changeCost(String id,int cost){
+     public void changeCost(String id,int cost) throws IOException {
          serviceRoom.changeCost(id,cost);
      }
-     public void deleteClient(Client client,Room room){
-         serviceClient.deleteClient(client,room);
-     }
-     public void getListOfClients(){
-         serviceClient.printList();
-     }
-     public void getNumberOfClients(){
-         serviceClient.getNumberOfClients();
-     }
-     public void getNumberOfFreeRooms(){
+     public void getNumberOfFreeRooms() throws IOException {
          serviceRoom.getNumberOfFreeRooms();
      }
      public void addService(Service service){
          serviceService.addService(service);
      }
-     public void showServices(){
-         serviceService.showServices();
-     }
-     public void addServiceToClient(Client client,Service service){
-         serviceService.addServiceToClient(client,service);
-     }
-
 
 }

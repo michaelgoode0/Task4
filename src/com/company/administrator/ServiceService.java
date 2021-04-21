@@ -1,27 +1,16 @@
 package com.company.administrator;
 
-import com.company.entities.Client;
-import com.company.entities.Hotel;
+import com.company.dao.IServiceDao;
 import com.company.entities.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+public class ServiceService {
+    private IServiceDao serviceDao;
 
-public class ServiceService { ;
-    private  Map<Client,Service> listOfServices = new HashMap<>();
+    public void setServiceDao(IServiceDao serviceDao) {
+        this.serviceDao = serviceDao;
+    }
 
     public void addService(Service service){
-        Hotel.getHotel().getServices().add(service);
-    }
-
-    public void addServiceToClient(Client client, Service service){
-        listOfServices.put(client,service);
-    }
-
-    public void showServices(){
-        for(var item : listOfServices.entrySet()){
-            System.out.printf("Имя : %s  Сервис: %s Стоимость сервиса: %s\n", item.getKey().getName(), item.getValue().getName() , item.getValue().getCost());
-        }
+        serviceDao.saveService(service);
     }
 }

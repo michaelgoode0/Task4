@@ -10,6 +10,9 @@ public class Room {
     private Status status;
     private int capacity;
     private int stars;
+    public Room(){
+
+    }
 
     public Room(String id, int cost, int capacity, int stars){
         this.id = id;
@@ -51,7 +54,15 @@ public class Room {
         return stars;
     }
 
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public void setStars(int stars) {
+        this.stars = stars;
+    }
+
     public String toString(){
-        return "ID "+this.id + " Stars " + this.stars + " Status "+ this.status + " Capacity " + this.capacity + " Cost " + this.cost;
+        return this.id +"," +this.stars + ","+ this.status + "," + this.capacity + "," + this.cost;
     }
 }

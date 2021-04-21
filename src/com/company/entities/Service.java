@@ -1,11 +1,13 @@
 package com.company.entities;
 
-import java.util.ArrayList;
 
 public class Service {
     private String name;
     private int cost;
 
+    public Service(){
+
+    }
     public Service(String name, int cost){
         this.cost=cost;
         this.name=name;
@@ -28,6 +30,6 @@ public class Service {
     }
 
     public String toString(){
-        return "Name "+ this.name + " | Cost " + this.cost;
+        return this.name + "," + this.cost;
     }
 }

@@ -1,1 +1,2 @@
-Kirill  |Sat Jul 25 17:53:03 MSK 2020
+Kirill,10.04.2004
+David,01.04.2020

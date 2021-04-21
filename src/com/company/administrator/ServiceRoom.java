@@ -3,67 +3,72 @@ package com.company.administrator;
 import com.company.comparator.CapacityComparator;
 import com.company.comparator.CostComparator;
 import com.company.comparator.StarsComparator;
-import com.company.entities.Hotel;
+import com.company.dao.IRoomDao;
 import com.company.entities.Room;
 import com.company.enums.Status;
 
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.Collections;
 
 public class ServiceRoom {
+    private IRoomDao roomDao;
+    public void setRoomDao(IRoomDao roomDao){
+        this.roomDao=roomDao;
+    }
 
-    public void delete(String number) {
+    public void delete(String number) throws IOException {
         int index = getIndex(number);
         if (index != -1) {
-           Hotel.getHotel().getRooms().remove(index);
+           roomDao.getListOfRooms().remove(index);
             System.out.printf("Удалена комната: %s" + "\n", number);
         } else System.out.println("Такой комнаты не существует");
     }
 
-    private int getIndex(String number){
-        for(var i :Hotel.getHotel().getRooms()) {
+    private int getIndex(String number) throws IOException {
+        for(var i :roomDao.getListOfRooms()) {
             if(i.getId().equals(number)) {
-                return Hotel.getHotel().getRooms().indexOf(i);
+                return roomDao.getListOfRooms().indexOf(i);
             }
         }
         return -1;
     }
-    public void changeCost(String number, int cost){
+    public void changeCost(String number, int cost) throws IOException {
         int index = getIndex(number);
         if(cost>=0|| index!=-1){
-            Hotel.getHotel().getRooms().get(index).setCost(cost);
+            roomDao.getListOfRooms().get(index).setCost(cost);
         }
         else System.out.println("Неверно указан номер или сумма");
     }
 
-    public void changeStatus(String number, Status status){
+    public void changeStatus(String number, Status status) throws IOException {
         int index=getIndex(number);
-        Hotel.getHotel().getRooms().get(index).setStatus(status);
+        roomDao.getListOfRooms().get(index).setStatus(status);
     }
 
     public void addRoom(Room room){
-        Hotel.getHotel().getRooms().add(room);
+        roomDao.saveRoom(room);
     }
 
-    public void getNumberOfFreeRooms(){
+    public void getNumberOfFreeRooms() throws IOException {
         int p=0;
-        for(var i:Hotel.getHotel().getRooms()){
+        for(var i:roomDao.getListOfRooms()){
             if(i.getStatus()==Status.FREE){
                 p++;
             }
         }
         System.out.println(p);
     }
-    public void sortByCost(){
-        Collections.sort(Hotel.getHotel().getRooms(), new CostComparator());
+    public void sortByCost() throws IOException {
+        Collections.sort(roomDao.getListOfRooms(), new CostComparator());
         System.out.println("Sorted by cost");
     }
-    public void sortByCapacity(){
-        Collections.sort(Hotel.getHotel().getRooms(), new CapacityComparator());
+    public void sortByCapacity() throws IOException {
+        Collections.sort(roomDao.getListOfRooms(), new CapacityComparator());
         System.out.println("Sorted by capacity");
     }
-    public void sortByStars(){
-        Collections.sort(Hotel.getHotel().getRooms(), new StarsComparator());
+    public void sortByStars() throws IOException {
+        Collections.sort(roomDao.getListOfRooms(), new StarsComparator());
         System.out.println("Sorted by stars");
     }
+
 }
