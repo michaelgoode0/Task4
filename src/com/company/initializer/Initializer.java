@@ -5,9 +5,7 @@ import com.company.administrator.Administrator;
 import com.company.administrator.ServiceClient;
 import com.company.administrator.ServiceRoom;
 import com.company.administrator.ServiceService;
-import com.company.dao.ClientDao;
-import com.company.dao.RoomDao;
-import com.company.dao.ServiceDao;
+import com.company.dao.*;
 import com.company.entities.Client;
 import com.company.entities.Room;
 import com.company.entities.Service;
@@ -20,21 +18,30 @@ public class Initializer {
     ServiceRoom serviceRoom = new ServiceRoom();
     ServiceClient serviceClient = new ServiceClient();
 
+
+
     Administrator administrator = new Administrator(serviceClient, serviceRoom, service);
 
     public Initializer(){
-
     }
     public void run() throws IOException {
-        /*Client client1 = new Client("Kirill", "09.03.2014");
-        Room room1 = new Room("1", 100, 50, 3);
-        Room room2 = new Room("2", 200, 50, 5);
+
+        serviceRoom.setRoomDao(new RoomDao());
+        service.setServiceDao(new ServiceDao());
+        serviceClient.setClientDao(new ClientDao());
+
+        Client client1 = new Client("Kirill", "09.03.2014");
+        Room room1 = new Room("KEKW", 3110, 50, 3);
+        Room room2 = new Room("KEKOW", 200, 70, 5);
+        Room room3 = new Room("Pog", 0, 8, 10);
         Service service = new Service("Завтрак", 100);
 
         administrator.addRoom(room1);
         administrator.addRoom(room2);
-        administrator.changeCost("1", 500);
+        administrator.addRoom(room3);
+        administrator.addClient(client1,room1);
         administrator.getNumberOfFreeRooms();
-        administrator.addService(service);*/
+        administrator.addService(service);
+
     }
 }

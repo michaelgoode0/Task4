@@ -26,14 +26,17 @@ public class Administrator {
      public void addRoom(Room room){
          serviceRoom.addRoom(room);
      }
-     public void addClient(Client client){
-         serviceClient.addClient(client);
+     public void addClient(Client client,Room room){
+         serviceClient.addClient(client, room);
      }
-     public void changeCost(String id,int cost) throws IOException {
-         serviceRoom.changeCost(id,cost);
+     public void changeCost(Room room,int cost) throws IOException {
+         serviceRoom.changeCost(room,cost);
      }
      public void getNumberOfFreeRooms() throws IOException {
          serviceRoom.getNumberOfFreeRooms();
+     }
+     public void sortByCost() throws IOException {
+        serviceRoom.sortByCost();
      }
      public void addService(Service service){
          serviceService.addService(service);

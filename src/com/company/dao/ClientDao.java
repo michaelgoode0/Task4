@@ -27,7 +27,6 @@ public class ClientDao implements IClientDao {
     public void saveClient(Client client) {
         writeInFile(client.toString(), true);
     }
-
     @Override
     public List<Client> getListOfClients() throws IOException {
         StringBuffer string = new StringBuffer();

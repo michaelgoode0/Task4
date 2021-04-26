@@ -41,7 +41,7 @@ public class RoomDao implements IRoomDao {
         for (int i = 0; i < kek.length / 5; i+=5) {
             Room room = new Room();
             room.setId(kek[i]);
-            room.setStars(Integer.parseInt(kek[i+1]));
+            room.setCost(Integer.parseInt(kek[i+1]));
             room.setStatus(Status.FREE);
             room.setCapacity(Integer.parseInt(kek[i+3]));
             room.setStars(Integer.parseInt(kek[i+4]));

@@ -62,7 +62,8 @@ public class Room {
         this.stars = stars;
     }
 
+    @Override
     public String toString(){
-        return this.id +"," +this.stars + ","+ this.status + "," + this.capacity + "," + this.cost;
+        return this.id +"," +this.cost + ","+ this.status + "," + this.capacity + "," + this.stars;
     }
 }

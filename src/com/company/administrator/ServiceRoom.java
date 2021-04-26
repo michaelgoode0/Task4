@@ -9,6 +9,7 @@ import com.company.enums.Status;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.Comparator;
 
 public class ServiceRoom {
     private IRoomDao roomDao;
@@ -32,18 +33,18 @@ public class ServiceRoom {
         }
         return -1;
     }
-    public void changeCost(String number, int cost) throws IOException {
-        int index = getIndex(number);
-        if(cost>=0|| index!=-1){
+    public void changeCost(Room room, int cost) throws IOException {
+        int index= roomDao.getListOfRooms().indexOf(room);
+        if(cost>=0){
             roomDao.getListOfRooms().get(index).setCost(cost);
         }
         else System.out.println("Неверно указан номер или сумма");
     }
-
+/*
     public void changeStatus(String number, Status status) throws IOException {
         int index=getIndex(number);
         roomDao.getListOfRooms().get(index).setStatus(status);
-    }
+    }*/
 
     public void addRoom(Room room){
         roomDao.saveRoom(room);
@@ -59,8 +60,8 @@ public class ServiceRoom {
         System.out.println(p);
     }
     public void sortByCost() throws IOException {
-        Collections.sort(roomDao.getListOfRooms(), new CostComparator());
-        System.out.println("Sorted by cost");
+        roomDao.getListOfRooms().sort(new CostComparator());
+        printRooms();
     }
     public void sortByCapacity() throws IOException {
         Collections.sort(roomDao.getListOfRooms(), new CapacityComparator());
@@ -69,6 +70,11 @@ public class ServiceRoom {
     public void sortByStars() throws IOException {
         Collections.sort(roomDao.getListOfRooms(), new StarsComparator());
         System.out.println("Sorted by stars");
+    }
+    public void printRooms() throws IOException {
+        for (var i:roomDao.getListOfRooms()){
+            System.out.print(i.toString());
+        }
     }
 
 }

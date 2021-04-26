@@ -1,2 +1,1 @@
-Ice cream,2
-Mini-bar,5
+Завтрак,100
