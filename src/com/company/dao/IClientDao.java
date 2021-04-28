@@ -14,4 +14,5 @@ public interface IClientDao {
     List<Client> getListOfClients() throws IOException;
 
     void update(Client client) throws Exception;
+
 }

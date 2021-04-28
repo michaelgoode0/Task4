@@ -1,47 +1,45 @@
 package com.company.initializer;
 
-/*import com.company.administrator.Administrator;*/
+
 import com.company.administrator.Administrator;
 import com.company.administrator.ServiceClient;
 import com.company.administrator.ServiceRoom;
 import com.company.administrator.ServiceService;
-import com.company.dao.*;
-import com.company.entities.Client;
-import com.company.entities.Room;
-import com.company.entities.Service;
-
-import java.io.IOException;
-
+import com.company.console.Builder;
+import com.company.console.MenuController;
+import com.company.console.Navigator;
+import com.company.dao.ClientDao;
+import com.company.dao.RoomDao;
+import com.company.dao.ServiceDao;
+import com.company.fileworker.FileWorker;
+import com.company.fileworker.Parser;
 
 public class Initializer {
+    String pathToClients = "C:/Users/burts/OneDrive/Документы/GitHub/Task4/src/com/company/recourses/data/ClientData.csv";
+    String pathToRooms = "C:/Users/burts/OneDrive/Документы/GitHub/Task4/src/com/company/recourses/data/RoomData.csv";
+    String pathToServices = "C:/Users/burts/OneDrive/Документы/GitHub/Task4/src/com/company/recourses/data/ServiceData.csv";
+
+    Parser parser = new Parser();
+    FileWorker clientWorker = new FileWorker(pathToClients);
+    FileWorker roomWorker = new FileWorker(pathToRooms);
+    FileWorker serviceWorker = new FileWorker(pathToServices);
+
     ServiceService service = new ServiceService();
     ServiceRoom serviceRoom = new ServiceRoom();
     ServiceClient serviceClient = new ServiceClient();
 
+    ClientDao clientDao = new ClientDao(parser,clientWorker);
+    RoomDao roomDao = new RoomDao(parser,roomWorker);
+    ServiceDao serviceDao = new ServiceDao(parser,serviceWorker);
 
+    public void run() {
+        service.setServiceDao(serviceDao);
+        serviceClient.setClientDao(clientDao);
+        serviceRoom.setRoomDao(roomDao);
 
-    Administrator administrator = new Administrator(serviceClient, serviceRoom, service);
-
-    public Initializer(){
-    }
-    public void run() throws IOException {
-
-        serviceRoom.setRoomDao(new RoomDao());
-        service.setServiceDao(new ServiceDao());
-        serviceClient.setClientDao(new ClientDao());
-
-        Client client1 = new Client("Kirill", "09.03.2014");
-        Room room1 = new Room("KEKW", 3110, 50, 3);
-        Room room2 = new Room("KEKOW", 200, 70, 5);
-        Room room3 = new Room("Pog", 0, 8, 10);
-        Service service = new Service("Завтрак", 100);
-
-        administrator.addRoom(room1);
-        administrator.addRoom(room2);
-        administrator.addRoom(room3);
-        administrator.addClient(client1,room1);
-        administrator.getNumberOfFreeRooms();
-        administrator.addService(service);
-
+        Administrator administrator = new Administrator(serviceClient, serviceRoom, service);
+        MenuController menu = new MenuController(new Builder(administrator), new Navigator());
+        menu.run();
     }
 }
+

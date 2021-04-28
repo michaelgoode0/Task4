@@ -4,12 +4,14 @@ import com.company.comparator.CapacityComparator;
 import com.company.comparator.CostComparator;
 import com.company.comparator.StarsComparator;
 import com.company.dao.IRoomDao;
+import com.company.entities.Client;
 import com.company.entities.Room;
 import com.company.enums.Status;
 
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 public class ServiceRoom {
     private IRoomDao roomDao;
@@ -17,28 +19,15 @@ public class ServiceRoom {
         this.roomDao=roomDao;
     }
 
-    public void delete(String number) throws IOException {
-        int index = getIndex(number);
-        if (index != -1) {
-           roomDao.getListOfRooms().remove(index);
-            System.out.printf("Удалена комната: %s" + "\n", number);
-        } else System.out.println("Такой комнаты не существует");
-    }
-
-    private int getIndex(String number) throws IOException {
-        for(var i :roomDao.getListOfRooms()) {
-            if(i.getId().equals(number)) {
-                return roomDao.getListOfRooms().indexOf(i);
-            }
-        }
-        return -1;
-    }
     public void changeCost(Room room, int cost) throws IOException {
         int index= roomDao.getListOfRooms().indexOf(room);
         if(cost>=0){
             roomDao.getListOfRooms().get(index).setCost(cost);
         }
         else System.out.println("Неверно указан номер или сумма");
+    }
+    public void updateRoom(Room room) throws Exception {
+        roomDao.update(room);
     }
 /*
     public void changeStatus(String number, Status status) throws IOException {
@@ -76,5 +65,11 @@ public class ServiceRoom {
             System.out.print(i.toString());
         }
     }
-
+    public List<Room> getListOfRooms() throws IOException {
+        List<Room> rooms = roomDao.getListOfRooms();
+        return rooms;
+    }
+    public Room get(int roomId) throws IOException {
+        return roomDao.get(roomId);
+    }
 }

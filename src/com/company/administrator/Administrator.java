@@ -9,6 +9,7 @@ import com.company.entities.Room;
 import com.company.entities.Service;
 
 import java.io.IOException;
+import java.util.List;
 
 public class Administrator {
 
@@ -22,24 +23,29 @@ public class Administrator {
         this.serviceRoom=serviceRoom;
     }
 
-
      public void addRoom(Room room){
          serviceRoom.addRoom(room);
      }
+
+     public void updateRoom(Room room) throws Exception {
+        serviceRoom.updateRoom(room);
+     }
      public void addClient(Client client,Room room){
-         serviceClient.addClient(client, room);
+         serviceClient.addClientToRoom(client,room);
      }
-     public void changeCost(Room room,int cost) throws IOException {
-         serviceRoom.changeCost(room,cost);
-     }
-     public void getNumberOfFreeRooms() throws IOException {
-         serviceRoom.getNumberOfFreeRooms();
-     }
-     public void sortByCost() throws IOException {
-        serviceRoom.sortByCost();
-     }
+
      public void addService(Service service){
          serviceService.addService(service);
      }
+
+     public Room getById(int roomId) throws IOException {
+        return serviceRoom.get(roomId);
+     }
+     public List<Room> getListOfRooms() throws IOException {
+        List<Room> rooms = serviceRoom.getListOfRooms();
+        return rooms;
+     }
+
+
 
 }

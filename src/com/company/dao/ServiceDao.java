@@ -1,51 +1,31 @@
 package com.company.dao;
 
-import com.company.entities.Client;
-import com.company.entities.Room;
 import com.company.entities.Service;
-import com.company.enums.Status;
+import com.company.fileworker.FileWorker;
+import com.company.fileworker.Parser;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ServiceDao implements IServiceDao {
-    private String path ="C:/Users/burts/OneDrive/Документы/GitHub/Task4/src/com/company/keeper/ServiceData.txt";
+    Parser parser;
+    FileWorker fileWorker;
 
-    public void writeInFile(String data, boolean bool) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(path, bool))) {
-            writer.write(data);
-            writer.append("\n");
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
+    private String path ="C:/Users/burts/OneDrive/Документы/GitHub/Task4/src/com/company/recourses/data/ServiceData.csv";
+
+    public ServiceDao(Parser parser, FileWorker fileWorker){
+        this.parser=parser;
+        this.fileWorker=fileWorker;
     }
 
     @Override
     public void saveService(Service service) {
-        writeInFile(service.toString(), true);
+        fileWorker.writeInFile(service.toString(), true);
     }
 
     @Override
     public List<Service> getListOfServices() throws IOException {
-        StringBuffer string = new StringBuffer();
-        Path path1 = FileSystems.getDefault().getPath(path);
-        Files.lines(path1, StandardCharsets.UTF_8).forEach(k -> string.append(k).append(","));
-        String k = string.toString();
-        List<Service> services = new ArrayList<>();
-        String[] kek = k.split(",");
-        for (int i = 0; i < kek.length / 2; i+=2) {
-            Service service= new Service();
-            service.setName(kek[i]);
-            service.setCost(Integer.parseInt(kek[i+1]));
-            services.add(service);
-        }
+        List<Service> services= parser.parseServices(path);
         return services;
     }
 
@@ -64,6 +44,7 @@ public class ServiceDao implements IServiceDao {
         for (var i : services) {
             update.append(i.toString()).append("\n");
         }
-        writeInFile(update.toString(), false);
+        fileWorker.writeInFile(update.toString(), false);
     }
+
 }

@@ -5,24 +5,33 @@ import com.company.enums.Status;
 import java.util.ArrayList;
 
 public class Room {
+    private Generator generator = new Generator();
     private int cost;
-    private String id;
+    private int id;
     private Status status;
     private int capacity;
     private int stars;
+    private int clientId;
     public Room(){
 
     }
 
-    public Room(String id, int cost, int capacity, int stars){
-        this.id = id;
+    public Room(int cost, int capacity, int stars){
+        this.id=generator.generateUniqueId();
         this.cost=cost;
-        this.status=Status.FREE;
         this.capacity=capacity;
         this.stars=stars;
     }
 
-    public String getId() {
+    public void setClientId(int clientId) {
+        this.clientId = clientId;
+    }
+
+    public int getClientId() {
+        return clientId;
+    }
+
+    public int getId() {
         return id;
     }
 
@@ -30,7 +39,7 @@ public class Room {
         return status;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

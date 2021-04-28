@@ -11,6 +11,8 @@ public interface IRoomDao {
 
     void update(Room room) throws Exception;
 
+    Room get(int roomId) throws IOException;
+
     List<Room> getListOfRooms() throws IOException;
 
 }
